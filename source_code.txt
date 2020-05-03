@@ -1,0 +1,88 @@
+Created on Sat Mar 28 16:08:30 2020
+
+@author: salipur
+"""
+
+
+import os
+import tkinter as tk
+from tkinter import *
+from tkinter import Label
+from PIL import ImageTk, Image
+from tkinter import ttk
+
+class Application(tk.Frame):
+    def __init__(self, master=None):
+        super().__init__(master)
+        self.master = master
+        self.pack()
+        self.create_widgets()
+
+        
+        
+    def create_widgets(self):
+        self.config(background ='#E5FFCC')
+        self.hi_there = tk.Button(self, text = 'Device Manager', fg = '#003366', 
+                                  bg = '#FFFFCC', bd =5, relief='raised')
+        #self.hi_there["text"] = "Device Manager"
+        self.hi_there["command"] = self.device
+        self.hi_there.pack(side="top", padx = 2, pady = 2)
+        
+        self.cmd = tk.Button(self, text = 'Command Prompt', fg = '#003366', 
+                             bg = '#FFFFCC', bd =5, relief='raised')
+        #self.cmd['text'] = 'Command Prompt'
+        self.cmd["command"] = self.terminal
+        self.cmd.pack(side="top", padx = 2, pady = 2)
+        
+        
+        self.c_panel = tk.Button(self, text = 'Control Panel', fg = '#003366', 
+                                 bg = '#FFFFCC', bd =5, relief='raised')
+        #self.c_panel['text'] = 'Conterol Panel'
+        self.c_panel['command'] = self.cpanel
+        self.c_panel.pack(side='top', padx = 2, pady = 2)
+        
+        self.r_edit = tk.Button(self, text = 'Registry Edit', fg = '#003366', 
+                                 bg = '#FFFFCC', bd =5, relief='raised')
+        #self.c_panel['text'] = 'Conterol Panel'
+        self.r_edit['command'] = self.reg
+        self.r_edit.pack(side='top', padx = 2, pady = 2)
+        
+        
+        
+        self.quit = tk.Button(self, text="Close the Application", fg="#003366", bg = '#FFFFCC',
+                              command=self.master.destroy, bd =5, relief='raised')
+        self.quit.pack(side="bottom", padx = 10, pady= 10)
+        
+    
+
+
+    def device(self):
+        os.system('start devmgmt')
+    
+    def terminal(self):
+        os.system('start cmd')
+        
+        
+    def cpanel(self):
+        os.system('start control')
+        
+    def reg(self):
+        os.system('start regedit')
+        
+
+root = tk.Tk()
+root.title('SYS ADMIN')
+
+
+canvas=Canvas(root,width=300,height=165)
+image=ImageTk.PhotoImage(Image.open("logo.gif"))
+
+canvas.create_image(0,0,anchor=NW,image=image)
+canvas.pack()
+
+root.geometry('250x360')
+root.configure(bg ='#E5FFCC')
+app = Application(master=root)
+app.mainloop()
+
+
